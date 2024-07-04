@@ -82,12 +82,11 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 
 			if (mergeSelections) {
 
-				const changedSelections = selectedRows?.filter((obj1, i, arr) =>
+				const changedSelections = state.selectedRows?.filter((obj1, i, arr) =>
 					arr.findIndex(obj2 => ((obj2 as any)[keyField]  === (obj1 as any)[keyField])) === i
 				)
 
 				const selections = [
-					...state.selectedRows,
 					...changedSelections
 				];
 
