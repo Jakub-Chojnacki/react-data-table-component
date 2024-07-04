@@ -203,7 +203,7 @@ export function isRowSelected<T>(
 		});
 	}
 
-	if (selectableRowProperty) return selectedRows.some(r => r[selectableRowProperty] === row[selectableRowProperty]);
+	if (selectableRowProperty) return selectedRows.some(r => (r as TableRow)[selectableRowProperty] === (row as TableRow)[selectableRowProperty]);
 
 	return selectedRows.some(r => r === row);
 }
