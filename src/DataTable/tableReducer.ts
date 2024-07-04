@@ -78,13 +78,16 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 		}
 
 		case 'SELECT_MULTIPLE_ROWS': {
-			const { keyField, selectedRows, totalRows, mergeSelections } = action;
+			const { keyField, selectedRows, totalRows, mergeSelections, selectableRowProperty } = action;
 			console.log('select_multiple_rows')
 			if (mergeSelections) {
-				const selections = [
+
+				const initialSelections = [
 					...state.selectedRows,
 					...selectedRows.filter(row => !isRowSelected(row, state.selectedRows, keyField)),
-				].filter((obj1, i, arr) => arr.findIndex(obj2 => (obj2 as any)[keyField] === (obj1 as any)[keyField]) === i);
+				]
+
+				const selections = selectableRowProperty ? initialSelections.filter((obj1, i, arr) => arr.findIndex(obj2 => (obj2 as any)[selectableRowProperty] === (obj1 as any)[selectableRowProperty]) === i) : initialSelections;
 
 				console.log(selections,state.selectedRows,selectedRows)
 
@@ -141,7 +144,6 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 			const mergeSelections = paginationServer && persistSelectedOnPageChange;
 			const clearSelectedOnPage = (paginationServer && !persistSelectedOnPageChange) || visibleOnly;
 
-			console.log('Change page')
 			return {
 				...state,
 				currentPage: page,

@@ -155,7 +155,7 @@ function DataTable<T>(props: TableProps<T>): JSX.Element {
 		contextMessage: defaultProps.contextMessage,
 	});
 
-	const { persistSelectedOnSort = false, persistSelectedOnPageChange = false } = paginationServerOptions;
+	const { persistSelectedOnSort = false, persistSelectedOnPageChange = false, selectableRowProperty = null } = paginationServerOptions;
 	const mergeSelections = !!(paginationServer && (persistSelectedOnPageChange || persistSelectedOnSort));
 	const enabledPagination = pagination && !progressPending && data.length > 0;
 	const Pagination = paginationComponent || NativePagination;
@@ -340,6 +340,7 @@ function DataTable<T>(props: TableProps<T>): JSX.Element {
 			selectedRows: selected,
 			totalRows: sortedData.length,
 			mergeSelections,
+			selectableRowProperty
 		});
 
 		// We only want to update the selectedRowState if data changes

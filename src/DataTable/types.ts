@@ -227,6 +227,7 @@ export interface PaginationOptions {
 export interface PaginationServerOptions {
 	persistSelectedOnSort?: boolean;
 	persistSelectedOnPageChange?: boolean;
+	selectableRowProperty?: string | null;
 }
 
 export interface ExpandableIcon {
@@ -336,6 +337,7 @@ export interface MultiRowAction<T> {
 	selectedRows: T[];
 	totalRows: number;
 	mergeSelections: boolean;
+	selectableRowProperty: null | string;
 }
 
 export interface SortAction<T> {

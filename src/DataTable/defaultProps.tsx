@@ -75,6 +75,7 @@ export const defaultProps = {
 	paginationServerOptions: {
 		persistSelectedOnSort: false,
 		persistSelectedOnPageChange: false,
+		selectableRowProperty:null,
 	},
 	paginationDefaultPage: 1,
 	paginationResetDefaultPage: false,
