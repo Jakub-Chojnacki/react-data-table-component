@@ -34,7 +34,7 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 		}
 
 		case 'SELECT_SINGLE_ROW': {
-			const { keyField, row, isSelected, rowCount, singleSelect } = action;
+			const { keyField, row, isSelected, rowCount, singleSelect, selectableRowProperty } = action;
 			// handle single select mode
 			if (singleSelect) {
 				if (isSelected) {
@@ -62,7 +62,7 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 					...state,
 					selectedCount: state.selectedRows.length > 0 ? state.selectedRows.length - 1 : 0,
 					allSelected: false,
-					selectedRows: removeItem(state.selectedRows, row, keyField),
+					selectedRows: removeItem(state.selectedRows, row, keyField, selectableRowProperty),
 					toggleOnSelectedRowsChange,
 				};
 			}

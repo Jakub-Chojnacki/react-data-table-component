@@ -79,7 +79,7 @@ export function insertItem<T>(array: T[] = [], item: T, index = 0): T[] {
 	return [...array.slice(0, index), item, ...array.slice(index)];
 }
 
-export function removeItem<T>(array: T[] = [], item: T, keyField = 'id'): T[] {
+export function removeItem<T>(array: T[] = [], item: T, keyField = 'id', selectableRowProperty: null | string = null): T[] {
 	const newArray = array.slice();
 	const outerField = prop(item as TableRow, keyField);
 
@@ -88,6 +88,7 @@ export function removeItem<T>(array: T[] = [], item: T, keyField = 'id'): T[] {
 			newArray.findIndex((a: T) => {
 				const innerField = prop(a as TableRow, keyField);
 
+				if(selectableRowProperty) return (a as TableRow)[selectableRowProperty] === (item as TableRow)[selectableRowProperty]
 				return innerField === outerField;
 			}),
 			1,

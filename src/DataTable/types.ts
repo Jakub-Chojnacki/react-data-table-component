@@ -329,6 +329,7 @@ export interface SingleRowAction<T> {
 	isSelected: boolean;
 	rowCount: number;
 	singleSelect: boolean;
+	selectableRowProperty: null | string;
 }
 
 export interface MultiRowAction<T> {

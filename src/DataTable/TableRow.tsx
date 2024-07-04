@@ -93,6 +93,7 @@ interface TableRowProps<T> extends Required<DProps<T>> {
 	onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
 	onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
 	onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
+	selectableRowProperty: string | null;
 }
 
 function Row<T>({
@@ -136,6 +137,7 @@ function Row<T>({
 	onDragEnd,
 	onDragEnter,
 	onDragLeave,
+	selectableRowProperty
 }: TableRowProps<T>): JSX.Element {
 	const [expanded, setExpanded] = React.useState(defaultExpanded);
 
@@ -229,6 +231,7 @@ function Row<T>({
 						selectableRowDisabled={selectableRowDisabled}
 						selectableRowsSingle={selectableRowsSingle}
 						onSelectedRow={onSelectedRow}
+						selectableRowProperty={selectableRowProperty}
 					/>
 				)}
 

@@ -485,6 +485,7 @@ function DataTable<T>(props: TableProps<T>): JSX.Element {
 											onDragEnd={handleDragEnd}
 											onDragEnter={handleDragEnter}
 											onDragLeave={handleDragLeave}
+											selectableRowProperty={selectableRowProperty}
 										/>
 									);
 								})}

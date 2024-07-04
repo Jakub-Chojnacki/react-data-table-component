@@ -24,6 +24,7 @@ type TableCellCheckboxProps<T> = {
 	selectableRowsSingle: boolean;
 	selectableRowDisabled: RowState<T>;
 	onSelectedRow: (action: SingleRowAction<T>) => void;
+	selectableRowProperty: string | null;
 };
 
 function TableCellCheckbox<T>({
@@ -37,6 +38,7 @@ function TableCellCheckbox<T>({
 	selectableRowsSingle,
 	selectableRowDisabled,
 	onSelectedRow,
+	selectableRowProperty
 }: TableCellCheckboxProps<T>): JSX.Element {
 	const disabled = !!(selectableRowDisabled && selectableRowDisabled(row));
 
@@ -48,6 +50,7 @@ function TableCellCheckbox<T>({
 			keyField,
 			rowCount,
 			singleSelect: selectableRowsSingle,
+			selectableRowProperty
 		});
 	};
 
