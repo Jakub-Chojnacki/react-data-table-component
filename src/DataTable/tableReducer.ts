@@ -58,6 +58,7 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 
 			// handle multi select mode
 			if (isSelected) {
+				console.log('singleSelect')
 				return {
 					...state,
 					selectedCount: state.selectedRows.length > 0 ? state.selectedRows.length - 1 : 0,

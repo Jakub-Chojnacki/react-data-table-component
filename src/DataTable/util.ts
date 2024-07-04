@@ -79,27 +79,40 @@ export function insertItem<T>(array: T[] = [], item: T, index = 0): T[] {
 	return [...array.slice(0, index), item, ...array.slice(index)];
 }
 
-export function removeItem<T>(array: T[] = [], item: T, keyField = 'id', selectableRowProperty: null | string = null): T[] {
+export function removeItem<T>(
+	array: T[] = [],
+	item: T,
+	keyField = 'id',
+	selectableRowProperty: null | string = null,
+): T[] {
 	const newArray = array.slice();
 	const outerField = prop(item as TableRow, keyField);
+
+	console.log(outerField);
 
 	if (outerField) {
 		newArray.splice(
 			newArray.findIndex((a: T) => {
 				const innerField = prop(a as TableRow, keyField);
 
-				if(selectableRowProperty) return (a as TableRow)[selectableRowProperty] === (item as TableRow)[selectableRowProperty]
+				if (selectableRowProperty) {
+					console.log((a as TableRow)[selectableRowProperty] === (item as TableRow)[selectableRowProperty]);
+					return (a as TableRow)[selectableRowProperty] === (item as TableRow)[selectableRowProperty];
+				}
+
 				return innerField === outerField;
 			}),
 			1,
 		);
 	} else {
+		console.log('no outer field')
 		newArray.splice(
 			newArray.findIndex(a => a === item),
 			1,
 		);
 	}
 
+	console.log(newArray)
 	return newArray;
 }
 
@@ -191,7 +204,7 @@ export function isRowSelected<T>(
 	row: T,
 	selectedRows: T[] = [],
 	keyField = 'id',
-	selectableRowProperty:null | string = null,
+	selectableRowProperty: null | string = null,
 ): boolean {
 	// cast row as TableRow because the property is unknown in advance therefore, typescript will throw an error
 	const outerField = prop(row as TableRow, keyField);
@@ -204,7 +217,8 @@ export function isRowSelected<T>(
 		});
 	}
 
-	if (selectableRowProperty) return selectedRows.some(r => (r as TableRow)[selectableRowProperty] === (row as TableRow)[selectableRowProperty]);
+	if (selectableRowProperty)
+		return selectedRows.some(r => (r as TableRow)[selectableRowProperty] === (row as TableRow)[selectableRowProperty]);
 
 	return selectedRows.some(r => r === row);
 }
