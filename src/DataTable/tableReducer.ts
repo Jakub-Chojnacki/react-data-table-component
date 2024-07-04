@@ -86,6 +86,8 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 					...selectedRows.filter(row => !isRowSelected(row, state.selectedRows, keyField)),
 				].filter((obj1, i, arr) => arr.findIndex(obj2 => (obj2 as any)[keyField] === (obj1 as any)[keyField]) === i);
 
+				console.log(selections,state.selectedRows,selectedRows)
+
 				return {
 					...state,
 					selectedCount: selections.length,
