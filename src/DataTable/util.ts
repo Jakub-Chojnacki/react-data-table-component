@@ -107,7 +107,10 @@ export function removeItem<T>(
 	} else {
 		console.log('no outer field')
 		newArray.splice(
-			newArray.findIndex(a => a === item),
+			newArray.findIndex(a => {
+				if (selectableRowProperty) return (a as TableRow)[selectableRowProperty] === (item as TableRow)[selectableRowProperty]
+				return a === item
+			}),
 			1,
 		);
 	}
