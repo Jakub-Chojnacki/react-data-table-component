@@ -35,7 +35,7 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 
 		case 'SELECT_SINGLE_ROW': {
 			const { keyField, row, isSelected, rowCount, singleSelect } = action;
-
+			console.log('SELECT_SINGLE_ROW')
 			// handle single select mode
 			if (singleSelect) {
 				if (isSelected) {
@@ -79,7 +79,7 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 
 		case 'SELECT_MULTIPLE_ROWS': {
 			const { keyField, selectedRows, totalRows, mergeSelections } = action;
-
+			console.log('select_multiple_rows')
 			if (mergeSelections) {
 				const selections = [
 					...state.selectedRows,
@@ -141,6 +141,7 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 			const mergeSelections = paginationServer && persistSelectedOnPageChange;
 			const clearSelectedOnPage = (paginationServer && !persistSelectedOnPageChange) || visibleOnly;
 
+			console.log('Change page')
 			return {
 				...state,
 				currentPage: page,
