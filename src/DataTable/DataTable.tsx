@@ -437,7 +437,7 @@ function DataTable<T>(props: TableProps<T>): JSX.Element {
 								{tableRows.map((row, i) => {
 									const key = prop(row as TableRow, keyField) as string | number;
 									const id = isEmpty(key) ? i : key;
-									const selected = isRowSelected(row, selectedRows, keyField);
+									const selected = isRowSelected(row, selectedRows, keyField, selectableRowProperty);
 									const expanderExpander = !!(expandableRows && expandableRowExpanded && expandableRowExpanded(row));
 									const expanderDisabled = !!(expandableRows && expandableRowDisabled && expandableRowDisabled(row));
 

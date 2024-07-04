@@ -186,7 +186,12 @@ export function getConditionalStyle<T>(
 	return { conditionalStyle: rowStyle, classNames: classNames.join(' ') };
 }
 
-export function isRowSelected<T>(row: T, selectedRows: T[] = [], keyField = 'id'): boolean {
+export function isRowSelected<T>(
+	row: T,
+	selectedRows: T[] = [],
+	keyField = 'id',
+	selectableRowProperty:null | string = null,
+): boolean {
 	// cast row as TableRow because the property is unknown in advance therefore, typescript will throw an error
 	const outerField = prop(row as TableRow, keyField);
 
@@ -197,6 +202,8 @@ export function isRowSelected<T>(row: T, selectedRows: T[] = [], keyField = 'id'
 			return innerField === outerField;
 		});
 	}
+
+	if (selectableRowProperty) return selectedRows.some(r => r[selectableRowProperty] === row[selectableRowProperty]);
 
 	return selectedRows.some(r => r === row);
 }

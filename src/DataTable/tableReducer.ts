@@ -35,7 +35,6 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 
 		case 'SELECT_SINGLE_ROW': {
 			const { keyField, row, isSelected, rowCount, singleSelect } = action;
-			console.log('SELECT_SINGLE_ROW')
 			// handle single select mode
 			if (singleSelect) {
 				if (isSelected) {
@@ -79,17 +78,22 @@ export function tableReducer<T>(state: TableState<T>, action: Action<T>): TableS
 
 		case 'SELECT_MULTIPLE_ROWS': {
 			const { keyField, selectedRows, totalRows, mergeSelections, selectableRowProperty } = action;
-			console.log('select_multiple_rows')
+			console.log('select_multiple_rows');
 			if (mergeSelections) {
-
 				const initialSelections = [
 					...state.selectedRows,
-					...selectedRows.filter(row => !isRowSelected(row, state.selectedRows, keyField)),
-				]
+					...selectedRows.filter(row => !isRowSelected(row, state.selectedRows, keyField, selectableRowProperty)),
+				];
 
-				const selections = selectableRowProperty ? initialSelections.filter((obj1, i, arr) => arr.findIndex(obj2 => (obj2 as any)[selectableRowProperty] === (obj1 as any)[selectableRowProperty]) === i) : initialSelections;
+				const selections = selectableRowProperty
+					? initialSelections.filter(
+							(obj1, i, arr) =>
+								arr.findIndex(obj2 => (obj2 as any)[selectableRowProperty] === (obj1 as any)[selectableRowProperty]) ===
+								i,
+						)
+					: initialSelections;
 
-				console.log(selections,state.selectedRows,selectedRows)
+				console.log(selections, state.selectedRows, selectedRows);
 
 				return {
 					...state,
